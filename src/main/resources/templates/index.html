@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Product</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+<div th:switch="${products}" class="container" >
+    <div class="col-md-12">
+        <div th:case="null">
+            <h1> Sory table is empty !!!  </h1>
+        </div>
+        <div th:case="*">
+            <div class="row col-md-12 mx-auto margin-top-20">
+                <div class="col-md-10">
+                    <h1 class="">Product List</h1>
+                </div>
+                <div class="col-md-2">
+                    <a class="btn btn-success" href="/newProduct">
+                        Add product
+                    </a>
+                </div>
+
+
+            </div>
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Edite</th>
+                    <th scope="col">Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="product : ${products}" >
+                    <th scope="row" th:text="${product.id}"></th>
+                    <td th:text="${product.name}" ></td>
+                    <td th:text="${product.category}"></td>
+                    <td th:text="${product.price}"></td>
+                    <td>
+                        <a th:href="@{/editeProduct/{id}(id=${product.id})}">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <a th:href="@{/deleteProduct/{id}(id=${product.id})}">
+                            <i class="fa-solid fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
